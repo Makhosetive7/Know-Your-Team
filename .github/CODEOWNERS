@@ -1,0 +1,10 @@
+# Assign owners before enabling branch protection.
+# GitHub will request reviews from these accounts; do not leave a fake handle here.
+#
+# Example (uncomment and replace):
+# *                                  @your-org/maintainers
+# /AGENTS.md                         @your-org/maintainers
+# /CONTRIBUTING.md                   @your-org/maintainers
+# /docs/coding-standards-playbook.md @your-org/maintainers
+# /.github/                          @your-org/maintainers
+# /.cursor/                          @your-org/maintainers

@@ -1,0 +1,15 @@
+---
+description: Core Know Your Team rules for every session
+alwaysApply: true
+---
+
+# Know Your Team
+
+Read `AGENTS.md` and `CONTRIBUTING.md` before changing anything. Language rules: `docs/coding-standards-frontend.md` and `docs/coding-standards-backend.md`. If a rule here disagrees with `AGENTS.md`, follow `AGENTS.md`.
+
+- Stack: React + JavaScript + Vite frontend, Python FastAPI backend, PostgreSQL. No Express, MongoDB, TypeScript, or native apps.
+- Small, scoped diffs. Search before adding helpers. Do not add dependencies without asking.
+- Every behaviour change needs a test. Do not weaken lint, types, or tests to go green.
+- Never commit secrets. Never swallow errors. Frontend is JavaScript with JSDoc, not TypeScript.
+- Privacy: team-level progress only. Completing an activity is not consent to share a response.
+- Imitate `docs/reference-module.md` until `frontend/src/features/activities/` exists.

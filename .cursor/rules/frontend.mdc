@@ -1,0 +1,18 @@
+---
+description: Frontend JavaScript and React conventions
+globs: frontend/**/*.{js,jsx}
+alwaysApply: false
+---
+
+# Frontend
+
+Follow `docs/coding-standards-frontend.md`. This app is JavaScript, not TypeScript.
+
+- `const` default, `let` if reassigned, never `var`. Named exports only.
+- Files: kebab-case, including hooks (`use-daily-activity.js` exports `useDailyActivity`). Components `PascalCase.jsx`. No `.ts` or `.tsx`.
+- `function` for components, hooks, and public helpers. Arrows for callbacks.
+- JSDoc `@typedef` / `@param` / `@returns` on public functions (`eslint-plugin-jsdoc` when ESLint exists). Event props `onX`; handlers `handleX`.
+- No default args of `[]`. Optional lists: omit the key, use `ids ?? []` inside. Options objects may default to `{}`.
+- Frozen constant maps for roles and statuses. `null` from the API; omit optional props.
+- `src/services` is the only HTTP boundary. No client-side assignment or authz.
+- No class components, no `React.FC`, no individual leaderboards, no `console.log`.

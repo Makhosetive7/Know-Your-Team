@@ -1,0 +1,18 @@
+---
+description: FastAPI layering, types, and function conventions
+globs: backend/**/*.py
+alwaysApply: false
+---
+
+# Backend
+
+Follow `docs/coding-standards-backend.md`.
+
+- Typed public functions (`-> None` if needed). `list[T]`, `X | None` — not `List`/`Optional`.
+- `from typing import Annotated` for FastAPI `Depends`. `IntegrityError` comes from `sqlalchemy.exc`.
+- Keyword-only ids: `user_id=`, `team_id=`. No mutable defaults. No `Any` in domain code.
+- Pydantic in `schemas`, ORM in `models`, `StrEnum` on the wire (persist `.value`, not member name), `uuid.UUID` for ids.
+- `async def` for I/O only. Services raise domain errors; never `None` for "not allowed".
+- Routers → services → repositories. Get-or-create; unique `(team, date)` and completions.
+- Team timezone for "today". Error body `{ "error": { "code", "message" } }`.
+- No individual rankings. Do not log tokens, passwords, or private reflections.
