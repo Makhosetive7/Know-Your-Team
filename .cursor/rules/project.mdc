@@ -12,4 +12,4 @@ Read `AGENTS.md` and `CONTRIBUTING.md` before changing anything. Language rules:
 - Every behaviour change needs a test. Do not weaken lint, types, or tests to go green.
 - Never commit secrets. Never swallow errors. Frontend is JavaScript with JSDoc, not TypeScript.
 - Privacy: team-level progress only. Completing an activity is not consent to share a response.
-- Imitate `docs/reference-module.md` until `frontend/src/features/activities/` exists.
+- Imitate `frontend/src/features/activities/` and `backend/app/services/`.

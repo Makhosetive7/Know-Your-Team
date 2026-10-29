@@ -2,7 +2,7 @@
 
 Detailed backend design for Know Your Team. System context is in the [unified architecture](../ARCHITECTURE.md). Package orientation is in the [backend README](README.md).
 
-This describes the intended MVP. Application code is not in the repository yet.
+This describes the intended MVP. Authentication, teams, invitations, daily assignment, completions, and team-level progress are implemented. Email verification and password reset are still deferred.
 
 ## Modular monolith
 

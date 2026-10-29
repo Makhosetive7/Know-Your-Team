@@ -2,7 +2,7 @@
 
 System-level design for Know Your Team. Package detail lives in [backend architecture](backend/ARCHITECTURE.md) and [frontend architecture](frontend/ARCHITECTURE.md).
 
-This describes the intended MVP. Application code is not in the repository yet.
+This describes the intended MVP. The backend API and frontend screens for that MVP are implemented.
 
 ## Goals and constraints
 

@@ -15,16 +15,16 @@ This playbook is adapted to this repository. The stack is React + JavaScript + V
 - [x] Create `AGENTS.md` (single source of truth for AI tools)
 - [x] Create pointer files (`CLAUDE.md`, `.cursorrules`, `.github/copilot-instructions.md`)
 - [x] Create `CONTRIBUTING.md`
-- [x] Create a reference spec ([reference-module.md](reference-module.md)); replace with real feature folders when code exists
+- [x] Create a reference spec ([reference-module.md](reference-module.md)) pointing at real feature folders
 - [x] Language standards: [frontend](coding-standards-frontend.md) and [backend](coding-standards-backend.md)
 
 ### Phase 2: Tooling that enforces style
 
 - [x] `.editorconfig`
 - [x] Shared VS Code settings and extension recommendations
-- [ ] Prettier (when `frontend/package.json` exists)
-- [ ] ESLint shared config (when frontend code exists)
-- [ ] Ruff + mypy in `backend/pyproject.toml`
+- [x] Prettier (`frontend/.prettierrc`)
+- [x] ESLint shared config (`frontend/eslint.config.js`)
+- [x] Ruff + mypy in `backend/pyproject.toml`
 
 ### Phase 3: Block bad code locally
 
@@ -34,8 +34,8 @@ This playbook is adapted to this repository. The stack is React + JavaScript + V
 
 ### Phase 4: Block bad code in CI
 
-- [ ] GitHub Actions: frontend lint, test, build
-- [ ] GitHub Actions: backend Ruff, mypy, pytest
+- [x] GitHub Actions: frontend lint, test, build
+- [x] GitHub Actions: backend Ruff, mypy, pytest
 - [ ] Commitlint on pull requests
 - [ ] Mark checks as required on `main` (GitHub settings; cannot live in git)
 
@@ -57,7 +57,7 @@ This playbook is adapted to this repository. The stack is React + JavaScript + V
 - [x] Review checklist for AI-generated code
 - [ ] Short onboarding for new contributors when the team is more than one person
 
-Phase 1 is done. Phase 2 is done for EditorConfig and VS Code only. Prettier, ESLint, Ruff, and mypy wait for application packages. Do not add npm, pip, or CI jobs that would fail because those packages do not exist yet.
+Phase 1 is done. Phase 2 is done for EditorConfig, VS Code, and backend Ruff/mypy. Prettier and ESLint wait for frontend application code.
 
 ---
 
@@ -100,7 +100,7 @@ Land these **with the first application code**, not as empty configs that cannot
 
 Already in the repo. Python uses 4-space indent; everything else 2 spaces; LF; UTF-8; final newline.
 
-### 2.2 Prettier (frontend, later)
+### 2.2 Prettier (frontend)
 
 `.prettierrc` (intended):
 
@@ -116,7 +116,7 @@ Already in the repo. Python uses 4-space indent; everything else 2 spaces; LF; U
 
 Ignore `node_modules`, `dist`, `build`, `coverage`, and lockfiles.
 
-### 2.3 ESLint (frontend, later)
+### 2.3 ESLint (frontend)
 
 Flat config for JavaScript and JSX: `@eslint/js` recommended, `eslint-plugin-react`, `eslint-plugin-react-hooks`, `eslint-plugin-jsdoc`, Prettier last. Required rules:
 
@@ -130,7 +130,7 @@ Flat config for JavaScript and JSX: `@eslint/js` recommended, `eslint-plugin-rea
 
 JSDoc is how this frontend gets autocomplete and reviewable shapes. Without `eslint-plugin-jsdoc`, those tags are optional comments. Do not add `typescript-eslint` or a `tsconfig.json`.
 
-### 2.4 Python (later)
+### 2.4 Python
 
 `backend/pyproject.toml` intended tooling:
 
@@ -155,9 +155,9 @@ plugins = ["pydantic.mypy"]
 
 Already in `.vscode/`. Python files format with Ruff when that extension is installed; other files with Prettier when that extension is installed. Format-on-save is on.
 
-### 2.6 Scripts (later)
+### 2.6 Scripts
 
-`frontend/package.json` should expose `lint`, `lint:fix`, `format`, `format:check`, `test`, and a single `check` that runs format check, lint, and tests.
+`frontend/package.json` exposes `lint`, `lint:fix`, `format`, `format:check`, `test`, and a single `check` that runs format check, lint, and tests.
 
 Backend checks stay as `ruff check .`, `ruff format --check .`, `mypy .`, and `pytest` from `backend/`.
 
@@ -179,7 +179,7 @@ Do not install Husky in this docs-only state; there is no `package.json` to atta
 
 ## 4. Block bad code in CI
 
-Intended workflow (add as `.github/workflows/ci.yml` when apps can install):
+Intended workflow (`.github/workflows/ci.yml`; frontend jobs wait until `frontend/package.json` exists):
 
 - **frontend:** `npm ci` in `frontend/`, then format check, lint, test, build. Node 20. Cache npm.
 - **backend:** Python 3.11, install from the chosen lockfile or `pyproject.toml`, then Ruff check, Ruff format check, mypy, pytest.
@@ -295,8 +295,8 @@ Before approving AI-generated work, a human verifies:
 | ----- | ------------------------------------------------- | ---------------------------------------- |
 | 1     | `AGENTS.md` + `CONTRIBUTING.md` + playbook        | Done                                     |
 | 2     | EditorConfig + VS Code + PR template              | Done                                     |
-| 3     | Prettier + ESLint + Ruff/mypy                     | First application code                   |
-| 4     | GitHub Actions CI with required checks            | When `check` scripts can pass            |
+| 3     | Prettier + ESLint + Ruff/mypy                     | Backend Ruff/mypy done; frontend later   |
+| 4     | GitHub Actions CI with required checks            | Backend job exists; frontend waits       |
 | 5     | Branch protection + real CODEOWNERS               | When GitHub remote and team exist        |
 | 6     | Husky + lint-staged + commitlint + pre-commit     | Same time as CI                          |
 | 7     | Real reference feature to imitate                 | First vertical slice (activity complete) |
@@ -304,7 +304,7 @@ Before approving AI-generated work, a human verifies:
 | 9     | Architecture rules (dependency-cruiser)           | After frontend `src/` exists             |
 | 10    | Onboarding session                                | When a second contributor joins          |
 
-Steps 1–2 are what a docs-only repo can honestly ship. Empty lint configs that cannot run are not enforcement.
+Steps 1–2 plus backend Ruff, mypy, pytest, and CI are in place. Frontend Prettier/ESLint wait until `frontend/package.json` exists. Empty lint configs that cannot run are not enforcement.
 
 ---
 

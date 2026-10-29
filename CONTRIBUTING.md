@@ -11,12 +11,8 @@ Thank you for helping build Know Your Team. The author of a change owns it, incl
 
 ## Setup
 
-This repository is still documentation-first. There is no application install yet.
-
-When application code exists:
-
 1. Clone the repository.
-2. Copy environment templates (when added) to local env files. Never commit secrets.
+2. Copy `backend/.env.example` to `backend/.env`. Never commit secrets.
 3. Frontend: `cd frontend && npm ci && npm run dev`
 4. Backend: follow [backend/README.md](backend/README.md) (PostgreSQL, migrations, FastAPI).
 5. Run the checks listed in AGENTS.md before you open a pull request.

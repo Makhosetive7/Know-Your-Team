@@ -301,7 +301,32 @@ Do not use `React.FC` (TypeScript-only). Do not use class components.
 
 See [File names](#file-names). Imports: external packages, then internal aliases, then relative. Do not import from `backend/`.
 
-When ESLint is added, include `eslint-plugin-jsdoc` so public methods actually have `@param` and `@returns`. JSDoc without that lint is a comment, not a check.
+ESLint includes `eslint-plugin-jsdoc` so public methods actually have `@param` and `@returns`.
+
+---
+
+## Styled components
+
+Use `styled-components`. Put styled pieces **after** the exported React function in the same file. The `styled` import stays at the top with other imports; the `const Card = styled.article` definitions do not. Tokens come from `src/styles/theme.js` via `ThemeProvider`. Do not hard-code hex values or font family names.
+
+```jsx
+import styled from 'styled-components';
+
+/**
+ * @param {object} props
+ * @param {string} props.title
+ */
+export function ExampleCard({ title }) {
+  return <Card>{title}</Card>;
+}
+
+const Card = styled.article`
+  background: ${({ theme }) => theme.color.surface};
+  color: ${({ theme }) => theme.color.ink};
+`;
+```
+
+Do not add CSS modules, Tailwind, or a UI kit.
 
 ---
 
@@ -315,3 +340,5 @@ When ESLint is added, include `eslint-plugin-jsdoc` so public methods actually h
 - `console.log` in committed code (`console.warn` / `console.error` only)
 - `eslint-disable` without a comment explaining why
 - Business rules that belong on the server
+- Styled component definitions above the React function
+- Hex colors or font names outside `src/styles/theme.js`

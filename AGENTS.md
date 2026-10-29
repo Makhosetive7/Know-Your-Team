@@ -6,11 +6,11 @@ Read this file and [CONTRIBUTING.md](CONTRIBUTING.md) before changing anything. 
 
 ## Project overview
 
-Know Your Team is a lightweight team-building web app: one featured activity per team per day so coworkers can connect without extra meetings. The MVP is a modular monolith. A React + JavaScript + Vite frontend talks to a Python FastAPI REST API. PostgreSQL is the system of record. The repository is still pre-MVP: documentation first, then application code.
+Know Your Team is a lightweight team-building web app: one featured activity per team per day so coworkers can connect without extra meetings. The MVP is a modular monolith. A React + JavaScript + Vite frontend talks to a Python FastAPI REST API. PostgreSQL is the system of record. The backend MVP API is in place. The frontend MVP screens talk to that API.
 
 ## Stack
 
-- Frontend: React, JavaScript (ES modules + JSX), Vite, responsive CSS or a component library
+- Frontend: React, JavaScript (ES modules + JSX), Vite, styled-components
 - Backend: Python 3.11+, FastAPI, REST, Pydantic
 - Database: PostgreSQL, SQLAlchemy or SQLModel, Alembic
 - Auth: an established implementation, not a custom protocol
@@ -21,7 +21,7 @@ There is no Node/Express backend, no MongoDB, no microservices, and no native ap
 
 ## Commands
 
-Application scripts are not in the repository yet. When they exist, use these from the package directories. Do not invent a root `npm run dev` that runs both apps unless we add it.
+Use these from the package directories. Do not invent a root `npm run dev` that runs both apps unless we add it.
 
 **Frontend** (`frontend/`):
 
@@ -38,8 +38,6 @@ Application scripts are not in the repository yet. When they exist, use these fr
 - Format: `ruff format .`
 - Types: `mypy .`
 - Test: `pytest`
-
-Until those scripts exist, do not add fake commands, extra package managers, or new dependencies to "make checks work".
 
 ## Rules you MUST follow
 
@@ -61,6 +59,7 @@ Until those scripts exist, do not add fake commands, extra package managers, or 
 Detail with examples: [frontend coding standards](docs/coding-standards-frontend.md) and [backend coding standards](docs/coding-standards-backend.md). Summary:
 
 - JavaScript files: `kebab-case.js` (hooks too: `use-daily-activity.js`); React components: `PascalCase.jsx` matching the export
+- styled-components after the React function in the same file; tokens from `frontend/src/styles/theme.js`
 - JavaScript: `const` over `let`, never `var`; `function` for components/hooks/public helpers; arrows for callbacks; named exports only; JSDoc on public functions; frozen constant maps for roles/statuses; `null` from the API, omitted keys for optional props
 - Python modules: `snake_case.py`; functions/variables: `snake_case`; classes: `PascalCase`; constants: `UPPER_SNAKE_CASE`
 - Python: typed public functions; `list[T]` / `X | None` not `List` / `Optional`; keyword-only ids (`user_id=`); Pydantic schemas, `StrEnum` for wire values, `uuid.UUID` for ids; no mutable defaults
@@ -130,7 +129,7 @@ When application code exists, imitate:
 - Frontend: `frontend/src/features/activities/`
 - Backend: daily assignment and completion in `backend/app/services/` plus matching tests in `backend/tests/`
 
-Until those folders exist, follow [docs/reference-module.md](docs/reference-module.md).
+Those folders exist; [docs/reference-module.md](docs/reference-module.md) points at them.
 
 ## Do not
 

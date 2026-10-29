@@ -6,12 +6,12 @@ Know Your Team is a lightweight team-building web application that helps coworke
 
 ## Status
 
-Planning / pre-MVP. This repository currently holds documentation for the intended product. Application code is not in place yet.
+Pre-MVP. The backend MVP API and the matching frontend screens are in place (auth, teams, invitations, daily activities, progress).
 
 ## What this repository contains
 
-- [`frontend/`](frontend/README.md) — responsive web app (planned)
-- [`backend/`](backend/README.md) — REST API and domain logic (planned)
+- [`frontend/`](frontend/README.md) — responsive web app (auth, teams, today's activity, progress)
+- [`backend/`](backend/README.md) — REST API and domain logic (MVP endpoints are implemented)
 - [`ARCHITECTURE.md`](ARCHITECTURE.md) — system-level architecture
 - [`AGENTS.md`](AGENTS.md) — coding rules for humans and AI tools
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — branches, commits, PRs, AI policy
@@ -39,9 +39,9 @@ A user can register, create or join a team, see the same daily activity as every
 
 | Layer | Choice |
 |-------|--------|
-| Frontend | React, JavaScript, Vite, responsive CSS or a component library |
+| Frontend | React, JavaScript, Vite, styled-components |
 | Backend | Python, FastAPI, REST, Pydantic |
-| Database | PostgreSQL, SQLAlchemy or SQLModel, Alembic |
+| Database | PostgreSQL, SQLAlchemy 2.0, Alembic |
 | Tests | Pytest, frontend unit tests, API integration tests, browser end-to-end tests for critical journeys |
 
 ## Repository map
@@ -55,7 +55,9 @@ A user can register, create or join a team, see the same daily activity as every
 
 ## Local development
 
-The API and web app are intended to run as separate processes against a PostgreSQL database, with configuration in environment variables and secrets kept out of the repository. Setup, run, and test commands will be added when application code exists.
+The API and web app run as separate processes. PostgreSQL is the system of record. Configuration is in environment variables; secrets stay out of the repository.
+
+Backend setup, run, and test commands: [backend/README.md](backend/README.md). From the repo root, `docker compose up -d db` starts Postgres. Frontend: `cd frontend && npm ci && npm run dev`. A local demo seed for invite links and participation is documented in the backend README.
 
 ## Privacy
 
@@ -64,4 +66,3 @@ Know Your Team is for connection, not monitoring. Progress is reported at team l
 ## License
 
 TBD
-# Know-Your-Team
